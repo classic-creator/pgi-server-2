@@ -12,5 +12,5 @@ router.post("/production/job/batch", getBatchesByJobId);
 router.post("/target/review/:id", TargetReview);
 router.get("/finish_goods", getAllFinishedGoodsWithVariant);
 router.post("/production/update/:id",verifyToken, workflowTracking);
-
+//hiii
 export default router;
