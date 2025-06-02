@@ -1,0 +1,31 @@
+name: Sync to Original Repo
+
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the sync on
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "vivek ranjan"
+        git config --global user.email "vivekranjan0144"
+
+    - name: Add remote for original repository
+      run: git remote add upstream https://github.com/classic-creator/pgi-server-2.git  # Replace with the URL of the original repo
+
+    - name: Fetch from original repository
+      run: git fetch upstream
+
+    - name: Merge changes from original repository
+      run: git merge upstream/main  # Change this to the branch you want to sync with
+
+    - name: Push changes to current repository
+      run: git push origin main  # Change this to your desired branch
