@@ -46,3 +46,14 @@ export const isSupervisorOrAbove = (req, res, next) => {
   }
   next();
 };
+export const isNotManagerOrAdmin = (req, res, next) => {
+  const blockedRoles = ['manager', 'admin'];
+
+  if (blockedRoles.includes(req.user?.role)) {
+    return res.status(403).json({
+      error: 'Access denied. Managers and Admins are not allowed to access this resource.',
+    });
+  }
+
+  next();
+};

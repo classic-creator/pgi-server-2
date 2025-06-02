@@ -54,11 +54,11 @@ export const createMaterialService = async (materialData) => {
 
 // get all material service by stock
 
-export const getAllMaterialsServicebystock = async () => {
+export const getAllMaterialsServicebystock = async (factory_id) => {
   try {
     // Step 1: Get all material IDs from stock table for the factory
     const allStockEntries = await Stock.findAll({
-      // where: { factory_id },
+      where: { factory_id },
       attributes: ['material_id', 'quantity_available', 'last_updated'],
       order: [['last_updated', 'DESC']]
     });
@@ -117,7 +117,7 @@ export const getAllMaterialsServicebystock = async () => {
 
 // get all material
 
-export const getAllMaterialsService = async (factory_id) => {
+export const getAllMaterialsService = async () => {
   try {
     const allMaterials = await Materials.findAll({
       include: [
