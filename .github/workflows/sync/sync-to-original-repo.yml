@@ -3,29 +3,42 @@ name: Sync to Original Repo
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger the sync on
+      - main  # Trigger this workflow when changes are pushed to the `main` branch
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    
+
+    permissions:
+      contents: write  # Ensure permission to push changes to the repository
+
     steps:
+    # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # Step 2: Set up Git configuration (replace with your details)
     - name: Set up Git
       run: |
         git config --global user.name "vivek ranjan"
         git config --global user.email "vivekranjan0144"
 
+    # Step 3: Add remote for the original repository (upstream)
     - name: Add remote for original repository
       run: git remote add upstream https://github.com/classic-creator/pgi-server-2.git  # Replace with the URL of the original repo
 
-    - name: Fetch from original repository
-      run: git fetch upstream
+    # Step 4: Fetch all remotes (fetch data from both the origin and upstream)
+    - name: Fetch all remotes
+      run: git fetch --all
 
-    - name: Merge changes from original repository
-      run: git merge upstream/main  # Change this to the branch you want to sync with
+    # Step 5: Pull changes from the original repository (upstream) using rebase
+    - name: Pull changes from original repository
+      run: git pull upstream main --rebase  # Rebase to avoid unnecessary merge commits
 
+    # Step 6: Check repository status (for debugging purposes)
+    - name: Check repository status
+      run: git status
+
+    # Step 7: Push the merged changes back to your repository
     - name: Push changes to current repository
-      run: git push origin main  # Change this to your desired branch
+      run: git push origin main  # Push changes to your repository on the `main` branch
