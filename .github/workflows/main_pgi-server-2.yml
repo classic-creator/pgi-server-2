@@ -20,11 +20,11 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: npm install, build, and test
+      - name: Install dependencies
         run: |
-          npm install  # Install dependencies
-          npm run build --if-present  # Run build if the script is defined
-          npm run test -- --passWithNoTests  # Run tests and pass even if no tests are found
+          npm install  # Install dependencies (ensure Jest is included)
+          npm run build --if-present  # Run build if defined
+          npm run test -- --passWithNoTests  # Run tests and pass if no tests are found
 
       - name: Zip artifact for deployment
         run: zip -r release.zip ./*  # Zip the contents for deployment
