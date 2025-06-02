@@ -8,8 +8,7 @@
     "start": "node app.js",
     "migrate": "sequelize-cli db:migrate",
     "seed": "sequelize-cli db:seed:all",
-   
-      "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +25,7 @@
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.10"
   }
 }
