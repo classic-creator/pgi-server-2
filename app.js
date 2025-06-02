@@ -11,11 +11,19 @@ import productionsrouts from './routes/ProductionRouts.js'; // import routes if 
 import employeeRouts from './routes/employRouts.js'; // import routes if needed
 
 const app = express();
-app.use(cors({
-  origin: 'http://localhost:3000', // Allow frontend
-  credentials: true, // if you're using cookies or auth headers
-}));
 
+const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 const port = process.env.PORT || 4000;
 
 app.use(express.json());

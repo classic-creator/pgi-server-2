@@ -61,8 +61,7 @@ export const getAllMaterialsbyStock = async (req, res) => {
 export const getAllMaterials = async (req, res) => {
   try {
 
-    // const {factory_id} = req.params;
-    const result = await getAllMaterialsServicebystock();
+    const result = await getAllMaterialsService();
 
     res.status(200).json({
       success: true,
