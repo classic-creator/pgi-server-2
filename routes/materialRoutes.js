@@ -14,5 +14,6 @@ router.post("/materials/approve/:id", verifyToken,finishMaterialRequestsForBatch
 router.get("/vendors", getAllvendor);
 router.get("/Factorys",verifyToken, getAllfactory);
 router.get("/material/request/:id",verifyToken, getAllMaterialRequestsController);
+router.get("/material/request/:id",verifyToken, getAllMaterialRequestsController);
 
 export default router;
